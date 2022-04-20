@@ -56,7 +56,7 @@ self.addEventListener('fetch', e => {
         console.error('BYPASS', method, url) :
         console.log(method, url) */
 
-        if(!bypass) {
+        if(method == 'GET' && !bypass) {
             const respuesta = caches.match(e.request).then( res => {
                 if(res) {
                     console.log('EXISTE: el recurso existe en el cache',url)
@@ -75,7 +75,7 @@ self.addEventListener('fetch', e => {
             e.respondWith(respuesta)        
         }
         else {
-            //console.warn('BYPASS', method, url)
+            console.warn('BYPASS', method, url)
         }
     }
 })
